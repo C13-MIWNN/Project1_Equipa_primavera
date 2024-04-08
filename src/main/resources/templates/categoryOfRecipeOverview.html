@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview of all categories</title>
+</head>
+<body>
+<h1>Overview of alle categories</h1>
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+    <tr th:each="category: ${allCategories}">
+        <td th:text="${category.nameOfCategoryOfRecipe}"></td>
+    </tr>
+    <form th:action="@{/category}" method="post" th:object="${newCategory}">
+        <tr>
+            <td><input type="text" th:field="*{nameOfCategoryOfRecipe}"></td>
+            <td><input type="submit" value="Save new category"></td>
+        </tr>
+    </form>
+</table>
+</body>
+</html>

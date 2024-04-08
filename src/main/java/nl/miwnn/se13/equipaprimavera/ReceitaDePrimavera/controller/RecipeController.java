@@ -1,6 +1,7 @@
 package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.controller;
 
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.Recipe;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.CategoryOfRecipeRepository;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,11 @@ import java.util.List;
 @Controller
 public class RecipeController {
     private final RecipeRepository recipeRepository;
+    private final CategoryOfRecipeRepository categoryOfRecipeRepository;
 
-    public RecipeController(RecipeRepository recipeRepository) {
+    public RecipeController(RecipeRepository recipeRepository, CategoryOfRecipeRepository categoryOfRecipeRepository) {
         this.recipeRepository = recipeRepository;
+        this.categoryOfRecipeRepository = categoryOfRecipeRepository;
     }
 
     @GetMapping({"/", "recipe"})
@@ -34,6 +37,7 @@ public class RecipeController {
     @GetMapping("/recipe/new")
     private String showRecipeForm(Model model) {
         model.addAttribute("recipe", new Recipe());
+        model.addAttribute("allCategories", categoryOfRecipeRepository.findAll());
         return "recipeForm";
     }
 

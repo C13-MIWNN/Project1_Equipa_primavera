@@ -3,6 +3,9 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+import java.util.Set;
 
 /**
  * @author Bram van Ham
@@ -14,13 +17,15 @@ public class Recipe {
     private Long recipeId;
     private String nameOfRecipe;
     private String ingredientsOfRecipe;
-    private String categoryOfRecipe;
+    @ManyToMany
+    private Set<CategoryOfRecipe> categoryOfRecipe;
 
-    public Recipe(String nameOfRecipe, String ingredientsOfRecipe, String categoryOfRecipe) {
+    public Recipe(String nameOfRecipe, String ingredientsOfRecipe, Set<CategoryOfRecipe> categoryOfRecipe) {
         this.nameOfRecipe = nameOfRecipe;
         this.ingredientsOfRecipe = ingredientsOfRecipe;
         this.categoryOfRecipe = categoryOfRecipe;
     }
+
     public Recipe() {
     }
     public Long getRecipeId() {
@@ -47,11 +52,11 @@ public class Recipe {
         this.ingredientsOfRecipe = ingredientsOfRecipe;
     }
 
-    public String getCategoryOfRecipe() {
+    public Set<CategoryOfRecipe> getCategoryOfRecipe() {
         return categoryOfRecipe;
     }
 
-    public void setCategoryOfRecipe(String categoryOfRecipe) {
+    public void setCategoryOfRecipe(Set<CategoryOfRecipe> categoryOfRecipe) {
         this.categoryOfRecipe = categoryOfRecipe;
     }
 }

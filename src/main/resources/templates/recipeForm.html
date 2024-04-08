@@ -22,7 +22,12 @@
                 <input type="text" id="ingredientRecipeField" th:field = "*{ingredientsOfRecipe}">
             </td>
             <td>
-                <input type="text" id="categoryRecipeField" th:field = "*{categoryOfRecipe}">
+                <select id="categoryRecipeField" th:field="*{categoryOfRecipe}" multiple>
+                    <option th:each="category: ${allCategories}"
+                            th:text="${category.nameOfCategoryOfRecipe}"
+                            th:value="${category.categoryOfRecipeId}">
+                    </option>
+                </select>
             </td>
         </tr>
     </table>
