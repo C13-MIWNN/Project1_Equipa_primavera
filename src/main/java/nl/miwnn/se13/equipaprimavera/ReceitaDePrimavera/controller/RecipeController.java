@@ -4,7 +4,9 @@ import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.Recipe;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.lang.reflect.Array;
@@ -19,13 +21,28 @@ import java.util.List;
 @Controller
 public class RecipeController {
     private final RecipeRepository recipeRepository;
+
     public RecipeController(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
-    @GetMapping("/")
+
+    @GetMapping({"/", "recipe"})
     private String showRecipeOverview(Model model) {
         model.addAttribute("allRecipes", recipeRepository.findAll());
         return "recipeOverview";
     }
+    @GetMapping("/recipe/new")
+    private String showRecipeForm(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "recipeForm";
+    }
 
+    @PostMapping("recipe/new")
+    private String saveRecipe(@ModelAttribute("recipe") Recipe recipeToBeSaved,
+                              BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            recipeRepository.save(recipeToBeSaved);
+        }
+        return "redirect:/recipe";
+    }
 }
