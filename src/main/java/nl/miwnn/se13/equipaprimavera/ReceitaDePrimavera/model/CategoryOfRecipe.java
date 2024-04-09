@@ -34,4 +34,9 @@ public class CategoryOfRecipe {
     public void setNameOfCategoryOfRecipe(String nameOfCategoryOfRecipe) {
         this.nameOfCategoryOfRecipe = nameOfCategoryOfRecipe;
     }
+
+    @Override
+    public String toString() {
+        return nameOfCategoryOfRecipe;
+    }
 }
