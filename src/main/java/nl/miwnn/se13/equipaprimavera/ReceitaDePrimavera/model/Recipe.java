@@ -16,12 +16,14 @@ public class Recipe {
     @Id @GeneratedValue
     private Long recipeId;
     private String nameOfRecipe;
+    private String stepsOfRecipe;
     private String ingredientsOfRecipe;
     @ManyToMany
     private Set<CategoryOfRecipe> categoryOfRecipe;
 
-    public Recipe(String nameOfRecipe, String ingredientsOfRecipe, Set<CategoryOfRecipe> categoryOfRecipe) {
+    public Recipe(String nameOfRecipe, String stepsOfRecipe, String ingredientsOfRecipe, Set<CategoryOfRecipe> categoryOfRecipe) {
         this.nameOfRecipe = nameOfRecipe;
+        this.stepsOfRecipe = stepsOfRecipe;
         this.ingredientsOfRecipe = ingredientsOfRecipe;
         this.categoryOfRecipe = categoryOfRecipe;
     }
