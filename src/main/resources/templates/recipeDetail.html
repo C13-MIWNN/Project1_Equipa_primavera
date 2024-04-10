@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Detail for a recipe</title>
-</head>
+    <title th:text="|Recipe for ${recipeToBeShown.nameOfRecipe}|"></title></head>
 <body>
 
 <h1>Detail for <span th:text="${recipeToBeShown.nameOfRecipe}"></span></h1>
