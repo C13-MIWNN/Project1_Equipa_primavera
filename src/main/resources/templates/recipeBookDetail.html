@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|List of recipes in ${recipeBookToBeShown.nameOfRecipeBook}|"></title></head>
+<body>
+<h1>List of recipes in <span th:text="${recipeBookToBeShown.nameOfRecipeBook}"></span></h1>
+<table>
+    <tr th:each="recipe: ${showAllRecipesInRecipeBook}">
+        <td><a th:href="@{/recipe/detail/{name}(name = ${recipe.nameOfRecipe})}" th:text="${recipe.nameOfRecipe}"></a>
+        </td>
+        <td><input type="button" value="Remove recipe from list"></td>
+    </tr>
+</table>
+</body>
+</html>
