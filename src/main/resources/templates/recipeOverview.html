@@ -9,14 +9,11 @@
 <table>
     <tr>
         <th>Name</th>
-        <th>Ingredients</th>
         <th>Category</th>
     </tr>
     <tr th:each="recipe: ${allRecipes}">
-        <td th:text="${recipe.nameOfRecipe}"></td>
-        <td th:text="${recipe.ingredientsOfRecipe}"></td>
+        <td><a th:href="@{/recipe/detail/{name}(name = ${recipe.nameOfRecipe})}" th:text="${recipe.nameOfRecipe}"></a></td>
         <td th:text="${recipe.categoryOfRecipe}"></td>
-        </td>
     </tr>
 </table>
 <p>

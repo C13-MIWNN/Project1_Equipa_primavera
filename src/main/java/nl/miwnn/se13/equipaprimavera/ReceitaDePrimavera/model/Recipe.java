@@ -1,9 +1,6 @@
 package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -15,6 +12,7 @@ import java.util.Set;
 public class Recipe {
     @Id @GeneratedValue
     private Long recipeId;
+    @Column(unique = true)
     private String nameOfRecipe;
     private String stepsOfRecipe;
     private String ingredientsOfRecipe;

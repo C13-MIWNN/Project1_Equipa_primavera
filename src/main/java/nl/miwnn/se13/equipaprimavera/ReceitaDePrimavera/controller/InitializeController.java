@@ -11,11 +11,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Controller
-public class initializeController {
+public class InitializeController {
     private final CategoryOfRecipeRepository categoryOfRecipeRepository;
     private final RecipeRepository recipeRepository;
 
-    public initializeController(CategoryOfRecipeRepository categoryOfRecipeRepository,
+    public InitializeController(CategoryOfRecipeRepository categoryOfRecipeRepository,
                                 RecipeRepository recipeRepository) {
         this.categoryOfRecipeRepository = categoryOfRecipeRepository;
         this.recipeRepository = recipeRepository;

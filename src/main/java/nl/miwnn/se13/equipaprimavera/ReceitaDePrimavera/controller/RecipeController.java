@@ -8,11 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Bram van Ham
@@ -48,5 +50,16 @@ public class RecipeController {
             recipeRepository.save(recipeToBeSaved);
         }
         return "redirect:/recipe";
+    }
+    @GetMapping("/recipe/detail/{name}")
+    private String showRecipeDetails(@PathVariable("name") String name, Model model) {
+        Optional<Recipe> recipe = recipeRepository.findByNameOfRecipe(name);
+
+        if (recipe.isEmpty()) {
+            return "redirect:/recipe";
+        }
+
+        model.addAttribute("recipeToBeShown", recipe.get());
+        return "recipeDetail";
     }
 }
