@@ -2,7 +2,7 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Bram van Ham
@@ -16,7 +16,7 @@ public class RecipeBook {
     @Column(unique = true)
     private String nameOfRecipeBook;
     @ManyToMany
-    private Set<Recipe> listOfRecipes;
+    private List<Recipe> listOfRecipes;
 
     public String getNameOfRecipeBook() {
         return nameOfRecipeBook;
@@ -26,11 +26,11 @@ public class RecipeBook {
         this.nameOfRecipeBook = nameOfRecipeBook;
     }
 
-    public Set<Recipe> getListOfRecipes() {
+    public List<Recipe> getListOfRecipes() {
         return listOfRecipes;
     }
 
-    public void setListOfRecipes(Set<Recipe> listOfRecipes) {
+    public void setListOfRecipes(List<Recipe> listOfRecipes) {
         this.listOfRecipes = listOfRecipes;
     }
 }
