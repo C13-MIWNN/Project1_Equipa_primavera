@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview of all recipebooks</title>
+</head>
+<body>
+<h1>Overview of all recipebooks</h1>
+<table>
+    <tr>
+        <th>Recipebook</th>
+    </tr>
+    <tr th:each="recipebook: ${allRecipeBooks}">
+            <td><a th:href="@{/book/detail/{name}(name = ${recipebook.nameOfRecipeBook})}" th:text="${recipebook.nameOfRecipeBook}"></a></td>
+    </tr>
+    <form th:action="@{/book}" method="post" th:object="${newRecipeBook}">
+        <tr>
+            <td><input type="text" th:field="*{nameOfRecipeBook}"></td>
+            <td><input type="submit" value="Save new recipebook"></td>
+        </tr>
+    </form>
+</table>
+
+</body>
+</html>
