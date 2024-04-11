@@ -2,6 +2,7 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,7 +15,9 @@ public class Recipe {
     private Long recipeId;
     @Column(unique = true)
     private String nameOfRecipe;
+//    @ElementCollection @OrderColumn Misschien later toch weer aan de praat krijgen met DTO
     private String stepsOfRecipe;
+
     private String ingredientsOfRecipe;
     @ManyToMany
     private Set<CategoryOfRecipe> categoryOfRecipe;
@@ -58,5 +61,13 @@ public class Recipe {
 
     public void setCategoryOfRecipe(Set<CategoryOfRecipe> categoryOfRecipe) {
         this.categoryOfRecipe = categoryOfRecipe;
+    }
+
+    public String getStepsOfRecipe() {
+        return stepsOfRecipe;
+    }
+
+    public void setStepsOfRecipe(String stepsOfRecipe) {
+        this.stepsOfRecipe = stepsOfRecipe;
     }
 }

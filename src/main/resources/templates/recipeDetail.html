@@ -2,11 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Detail for a recipe</title>
+    <title th:text="|Detail for a ${recipeToBeShown.nameOfRecipe}|"></title>
 </head>
 <body>
 
-<h1>Detail for <span th:text="${recipeToBeShown.nameOfRecipe}"></span></h1>
+<h1>Recipe for <span th:text="${recipeToBeShown.nameOfRecipe}"></span></h1>
+
+<h2>Follow these steps:</h2>
+<table>
+    <tr>
+        <th>Recipe in steps</th>
+    </tr>
+    // tekst van recept
+    </tr>
+
+</table>
 
 </body>
 </html>
