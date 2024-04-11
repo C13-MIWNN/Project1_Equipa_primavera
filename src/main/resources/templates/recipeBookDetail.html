@@ -6,10 +6,15 @@
 <body>
 <h1>List of recipes in <span th:text="${recipeBookToBeShown.nameOfRecipeBook}"></span></h1>
 <table>
-    <tr th:each="recipe: ${showAllRecipesInRecipeBook}">
+    <tr th:each="recipe, iterationStatus: ${showAllRecipesInRecipeBook}">
+        <td th:text="${iterationStatus.count}"></td>
         <td><a th:href="@{/recipe/detail/{name}(name = ${recipe.nameOfRecipe})}" th:text="${recipe.nameOfRecipe}"></a>
         </td>
-        <td><input type="button" value="Remove recipe from list"></td>
+        <td><a th:href="@{/book/detail/{name}/remove/{recipe}
+        (name = ${recipeBookToBeShown.nameOfRecipeBook},
+        recipe = ${recipe.nameOfRecipe})}"><button>Remove <span th:text="${recipe.nameOfRecipe}"></span> from recipebook</button></a>
+        </td>
+
     </tr>
 </table>
 </body>

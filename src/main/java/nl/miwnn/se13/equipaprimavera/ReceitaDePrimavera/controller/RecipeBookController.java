@@ -43,6 +43,7 @@ public class RecipeBookController {
         }
         return "redirect:/book";
     }
+
     @GetMapping("/book/detail/{name}")
     private String showRecipeBookList(@PathVariable("name") String name, Model model) {
         Optional<RecipeBook> recipeBook = recipeBookRepository.findBynameOfRecipeBook(name);
@@ -54,5 +55,21 @@ public class RecipeBookController {
         model.addAttribute("recipeBookToBeShown", recipeBook.get());
         model.addAttribute("showAllRecipesInRecipeBook", recipeBook.get().getListOfRecipes());
         return "recipeBookDetail";
+    }
+
+    @GetMapping("/book/detail/{name}/remove/{recipe}")
+    private String removeRecipeFromRecipeBook(@PathVariable("name") String name, Model model
+            , @PathVariable("recipe") String recipe) {
+        Optional<RecipeBook> recipeBook = recipeBookRepository.findBynameOfRecipeBook(name);
+        Optional<Recipe> optionalRecipe = recipeRepository.findByNameOfRecipe(recipe);
+
+        if (recipeBook.isEmpty() || optionalRecipe.isEmpty()) {
+            return "redirect:/book/";
+        }
+
+        recipeBook.get().getListOfRecipes().remove(optionalRecipe.get());
+        recipeBookRepository.save(recipeBook.get());
+
+        return "redirect:/book/detail/{name}";
     }
 }
