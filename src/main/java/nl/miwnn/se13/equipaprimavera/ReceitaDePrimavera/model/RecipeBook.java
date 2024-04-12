@@ -18,6 +18,14 @@ public class RecipeBook {
     @ManyToMany
     private List<Recipe> listOfRecipes;
 
+    public Long getRecipeBookId() {
+        return recipeBookId;
+    }
+
+    public void setRecipeBookId(Long recipeBookId) {
+        this.recipeBookId = recipeBookId;
+    }
+
     public String getNameOfRecipeBook() {
         return nameOfRecipeBook;
     }

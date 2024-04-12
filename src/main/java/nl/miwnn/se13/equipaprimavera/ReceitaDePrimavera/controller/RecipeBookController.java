@@ -58,8 +58,9 @@ public class RecipeBookController {
     }
 
     @GetMapping("/book/detail/{name}/remove/{recipe}")
-    private String removeRecipeFromRecipeBook(@PathVariable("name") String name, Model model
-            , @PathVariable("recipe") String recipe) {
+    private String removeRecipeFromRecipeBook(@PathVariable("name") String name,
+                                              @PathVariable("recipe") String recipe) {
+
         Optional<RecipeBook> recipeBook = recipeBookRepository.findBynameOfRecipeBook(name);
         Optional<Recipe> optionalRecipe = recipeRepository.findByNameOfRecipe(recipe);
 

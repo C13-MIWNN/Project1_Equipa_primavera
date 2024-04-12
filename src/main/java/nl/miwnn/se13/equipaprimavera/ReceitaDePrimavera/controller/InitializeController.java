@@ -51,6 +51,7 @@ public class InitializeController {
         MeasurementUnit eetlepel = makeMeasurementUnit("eetlepel");
 
         RecipeBook mijnEersteReceptenboek = makeRecipeBook("Mijn eerste receptenboek", lasagne, pizza, nasiGoreng);
+        RecipeBook vegetarischeRecepten = makeRecipeBook("VegetarischeRecepten", lasagne,pizza, nasiGoreng);
         return "redirect:/";
     }
 
@@ -62,7 +63,6 @@ public class InitializeController {
     }
 
     private RecipeBook makeRecipeBook(String nameOfRecipeBook, Recipe recipe, Recipe recipe1, Recipe recipe2) {
-
         RecipeBook recipeBook = new RecipeBook();
         recipeBook.setNameOfRecipeBook(nameOfRecipeBook);
 

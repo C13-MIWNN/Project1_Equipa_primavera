@@ -10,13 +10,9 @@
 
 <table>
     <tr>
-        <th>Amount</th>
-        <th>Measuring Unit</th>
         <th>Name</th>
     </tr>
     <tr th:each="ingredient : ${allIngredients}">
-        <td th:text="${ingredient.amountOfIngredient}"></td>
-        <td th:text="${ingredient.measurementUnit.nameOfMeasurement}"></td>
         <td th:text="${ingredient.nameIngredient}"></td>
     </tr>
 
