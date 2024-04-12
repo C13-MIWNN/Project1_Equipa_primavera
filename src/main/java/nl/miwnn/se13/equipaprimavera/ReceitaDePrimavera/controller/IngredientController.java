@@ -2,6 +2,7 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.controller;
 
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.Ingredient;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.IngredientRepository;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.MeasurementUnitRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +21,12 @@ import java.util.List;
 @Controller
 public class IngredientController {
     private final IngredientRepository ingredientRepository;
+    private final MeasurementUnitRepository measurementUnitRepository;
 
-    public IngredientController(IngredientRepository ingredientRepository) {
+    public IngredientController(IngredientRepository ingredientRepository,
+                                MeasurementUnitRepository measurementUnitRepository) {
         this.ingredientRepository = ingredientRepository;
+        this.measurementUnitRepository = measurementUnitRepository;
     }
 
 
@@ -35,6 +39,7 @@ public class IngredientController {
     @GetMapping("/ingredient/new")
     private String showIngredientForm(Model model) {
         model.addAttribute("ingredient", new Ingredient());
+        model.addAttribute("allMeasurementTypes", measurementUnitRepository.findAll());
         return "ingredientForm";
     }
 

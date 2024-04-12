@@ -1,8 +1,8 @@
 package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 /**
  * @author Mirjam Schmitz
@@ -13,13 +13,15 @@ import jakarta.persistence.Id;
 public class Ingredient {
     @Id @GeneratedValue
     private Long ingredientId;
+    @Column(unique = true)
     private String nameIngredient;
-    private String measuringUnit;
+    @ManyToOne
+    private MeasurementUnit measurementUnit;
     private int amountOfIngredient;
 
-    public Ingredient(String nameIngredient, String measuringUnit, int amountOfIngredient) {
+    public Ingredient(String nameIngredient, MeasurementUnit measuringUnit, int amountOfIngredient) {
         this.nameIngredient = nameIngredient;
-        this.measuringUnit = measuringUnit;
+        this.measurementUnit = measuringUnit;
         this.amountOfIngredient = amountOfIngredient;
     }
 
@@ -43,12 +45,12 @@ public class Ingredient {
         this.nameIngredient = nameIngredient;
     }
 
-    public String getMeasuringUnit() {
-        return measuringUnit;
+    public MeasurementUnit getMeasurementUnit() {
+        return measurementUnit;
     }
 
-    public void setMeasuringUnit(String measuringUnit) {
-        this.measuringUnit = measuringUnit;
+    public void setMeasurementUnit(MeasurementUnit measuringUnit) {
+        this.measurementUnit = measuringUnit;
     }
 
     public int getAmountOfIngredient() {

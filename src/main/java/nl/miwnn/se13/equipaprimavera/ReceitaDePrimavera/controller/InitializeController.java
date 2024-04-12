@@ -1,9 +1,11 @@
 package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.controller;
 
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.CategoryOfRecipe;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.MeasurementUnit;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.Recipe;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.RecipeBook;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.CategoryOfRecipeRepository;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.MeasurementUnitRepository;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeBookRepository;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeRepository;
 import org.springframework.stereotype.Controller;
@@ -19,12 +21,16 @@ public class InitializeController {
     private final CategoryOfRecipeRepository categoryOfRecipeRepository;
     private final RecipeRepository recipeRepository;
     private final RecipeBookRepository recipeBookRepository;
+    private final MeasurementUnitRepository measurementUnitRepository;
 
     public InitializeController(CategoryOfRecipeRepository categoryOfRecipeRepository,
-                                RecipeRepository recipeRepository, RecipeBookRepository recipeBookRepository) {
+                                RecipeRepository recipeRepository,
+                                RecipeBookRepository recipeBookRepository,
+                                MeasurementUnitRepository measurementUnitRepository) {
         this.categoryOfRecipeRepository = categoryOfRecipeRepository;
         this.recipeRepository = recipeRepository;
         this.recipeBookRepository = recipeBookRepository;
+        this.measurementUnitRepository = measurementUnitRepository;
     }
 
     @GetMapping("/initialize")
@@ -37,6 +43,12 @@ public class InitializeController {
         Recipe pizza = makeRecipe("Pizza", italiaans);
         Recipe nasiGoreng = makeRecipe("Nasi Goreng", aziatisch);
         Recipe tortilla = makeRecipe("Tortilla", mexicaans);
+
+        MeasurementUnit gram = makeMeasurementUnit("gram");
+        MeasurementUnit milliliter = makeMeasurementUnit("milliliter");
+        MeasurementUnit stuk = makeMeasurementUnit("stuk");
+        MeasurementUnit theelepel = makeMeasurementUnit("theelepel");
+        MeasurementUnit eetlepel = makeMeasurementUnit("eetlepel");
 
         RecipeBook mijnEersteReceptenboek = makeRecipeBook("Mijn eerste receptenboek", lasagne, pizza, nasiGoreng);
         return "redirect:/";
@@ -77,5 +89,10 @@ public class InitializeController {
         return recipe;
     }
 
+    private MeasurementUnit makeMeasurementUnit(String nameMeasurementUnit) {
+        MeasurementUnit measurementUnit = new MeasurementUnit();
+        measurementUnit.setNameOfMeasurement(nameMeasurementUnit);
+        measurementUnitRepository.save(measurementUnit);
+        return measurementUnit;
+    }
 }
-

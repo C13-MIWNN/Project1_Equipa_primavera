@@ -19,7 +19,12 @@
                 <input type="number" id="amountField" th:field = "*{amountOfIngredient}">
             </td>
             <td>
-                <input type="text" id="measurementUnitField" th:field = "*{measuringUnit}">
+                <select id="measurementUnitField" th:field="*{measurementUnit}">
+                    <option th:each="measurement: ${allMeasurementTypes}"
+                            th:text="${measurement.nameOfMeasurement}"
+                            th:value="${measurement.measurementUnitId}">
+                    </option>
+                </select>
             </td>
             <td>
                 <input type="text" id="nameIngredientField" th:field = "*{nameIngredient}">
