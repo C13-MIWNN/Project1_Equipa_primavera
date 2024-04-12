@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new ingredient</title>
+</head>
+<body>
+<h1>Create a new ingredient</h1>
+
+<form th:action = "@{/ingredient/new}" method="post" th:object = "${ingredient}">
+    <table>
+        <tr>
+            <td><label for="amountField">Amount</label></td>
+            <td><label for="measurementUnitField">Unit</label></td>
+            <td><label for="nameIngredientField">Name</label></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" id="amountField" th:field = "*{amountOfIngredient}">
+            </td>
+            <td>
+                <input type="text" id="measurementUnitField" th:field = "*{measuringUnit}">
+            </td>
+            <td>
+                <input type="text" id="nameIngredientField" th:field = "*{nameIngredient}">
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Save ingredient">
+</form>
+</body>
+</html>

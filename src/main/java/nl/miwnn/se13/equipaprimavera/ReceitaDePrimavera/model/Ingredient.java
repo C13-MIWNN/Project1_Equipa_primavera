@@ -10,20 +10,28 @@ import jakarta.persistence.Id;
  * Describes ingredients by name and amount
  **/
 @Entity
-public class Ingredients {
+public class Ingredient {
     @Id @GeneratedValue
     private Long ingredientId;
     private String nameIngredient;
     private String measuringUnit;
     private int amountOfIngredient;
 
-    public Ingredients(String nameIngredient, String measuringUnit, int amountOfIngredient) {
+    public Ingredient(String nameIngredient, String measuringUnit, int amountOfIngredient) {
         this.nameIngredient = nameIngredient;
         this.measuringUnit = measuringUnit;
         this.amountOfIngredient = amountOfIngredient;
     }
 
-    public Ingredients() {
+    public Ingredient() {
+    }
+
+    public Long getIngredientId() {
+        return ingredientId;
+    }
+
+    public void setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
     }
 
     public String getNameIngredient() {
