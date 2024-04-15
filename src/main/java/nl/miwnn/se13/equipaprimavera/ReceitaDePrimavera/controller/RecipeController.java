@@ -69,17 +69,4 @@ public class RecipeController {
         model.addAttribute("allRecipebooks", recipeBookRepository.findAll());
         return "recipeDetail";
     }
-
-    @PostMapping("/recipe/detail/{name}/add/{book}")
-    private String addRecipeToRecipeBook(@PathVariable("name") String name,
-                                         @PathVariable("book") String book) {
-        Optional<Recipe> recipe = recipeRepository.findByNameOfRecipe(name);
-        Optional<RecipeBook> recipeBook = recipeBookRepository.findBynameOfRecipeBook(book);
-        if (recipe.isEmpty() || recipeBook.isEmpty()) {
-            return String.format("redirect/recipe/detail/%s", name);
-        }
-        recipeBook.get().getListOfRecipes().add(recipe.get());
-        recipeBookRepository.save(recipeBook.get());
-        return String.format("redirect/book/detail/%s", book);
-    }
 }

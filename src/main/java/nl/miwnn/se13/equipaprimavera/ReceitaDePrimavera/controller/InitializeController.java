@@ -51,7 +51,7 @@ public class InitializeController {
         MeasurementUnit eetlepel = makeMeasurementUnit("eetlepel");
 
         RecipeBook mijnEersteReceptenboek = makeRecipeBook("Mijn eerste receptenboek", lasagne, pizza, nasiGoreng);
-        RecipeBook vegetarischeRecepten = makeRecipeBook("VegetarischeRecepten", lasagne,pizza, nasiGoreng);
+        RecipeBook vegetarischeRecepten = makeRecipeBook("Vegetarische recepten", lasagne,pizza, nasiGoreng);
         return "redirect:/";
     }
 

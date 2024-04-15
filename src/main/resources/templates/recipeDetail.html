@@ -18,12 +18,13 @@
 
 </table>
 
-<p>
-    Add recipe to:<select><option th:each="recipebook: ${allRecipebooks}"
-                                th:text="${recipebook.nameOfRecipeBook}"
-                                th:value="${recipebook.recipeBookId}">
-                    </option></select> <input type="button" value="save">
-</p>
+<form method="get" action="/book/add">
+    <input type="hidden" name="nameRecipe" th:value="${recipeToBeShown.nameOfRecipe}">
+    Add recipe to:<select name="recipebook"><option th:each="recipebook: ${allRecipebooks}"
+                                                    th:text="${recipebook.nameOfRecipeBook}"
+                                                    th:value="${recipebook.recipeBookId}">
+</option></select> <input type="submit" value="save"></a>
+</form>
 
 </body>
 </html>

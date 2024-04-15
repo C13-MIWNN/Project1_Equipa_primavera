@@ -7,10 +7,7 @@ import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeReposit
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -72,5 +69,21 @@ public class RecipeBookController {
         recipeBookRepository.save(recipeBook.get());
 
         return "redirect:/book/detail/{name}";
+    }
+
+    @GetMapping("/book/add")
+    private String addRecipeToRecipeBook(@RequestParam(name = "nameRecipe") String name,
+                                         @RequestParam(name = "recipebook") Long bookId) {
+        Optional<Recipe> recipe = recipeRepository.findByNameOfRecipe(name);
+        Optional<RecipeBook> recipeBook = recipeBookRepository.findById(bookId);
+        if (recipe.isEmpty() || recipeBook.isEmpty()) {
+            return String.format("redirect:/recipe/detail/%s", name);
+        }
+        if (recipeBook.get().getListOfRecipes().contains(recipe.get())) {
+            return String.format("redirect:/book/detail/%s", recipeBook.get().getNameOfRecipeBook());
+        }
+        recipeBook.get().getListOfRecipes().add(recipe.get());
+        recipeBookRepository.save(recipeBook.get());
+        return String.format("redirect:/book/detail/%s", recipeBook.get().getNameOfRecipeBook());
     }
 }
