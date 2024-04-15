@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:fragment="baseheader(title)">
+    <meta charset="UTF-8">
+    <title th:replace="${title}"></title>
+
+    <link rel="stylesheet" type="text/css" href="/css/recipe.css"/>
+</head>
+<body>
+
+<div th:fragment="navbar">
+    <ul>
+        <li>
+            <a th:href="@{/recipe}">Recipes</a>
+        </li>
+        <li>
+            <a th:href="@{/ingredient}">List of ingredients</a>
+        </li>
+        <li>
+            <a th:href="@{/book}">Recipe books</a>
+        </li>
+    </ul>
+</div>
+
+<div th:fragment="footer">
+    <footer><p class="text-center text text-muted">Copyright Equipa Primavera &copy;2024</p></footer>
+</div>
+
+<div th:fragment="bottomScripts">
+
+</div>
+
+</body>
+</html>

@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragments/general :: baseheader(~{:: title})}">
     <meta charset="UTF-8">
     <title>Overview of all categories</title>
 </head>
 <body>
-<h1>Overview of alle categories</h1>
-<table>
-    <tr>
-        <th>Name</th>
-    </tr>
-    <tr th:each="category: ${allCategories}">
-        <td th:text="${category.nameOfCategoryOfRecipe}"></td>
-    </tr>
-    <form th:action="@{/category}" method="post" th:object="${newCategory}">
+
+<div th:replace="~{fragments/general :: navbar}"></div>
+
+<div class="container">
+    <h1>Overview of alle categories</h1>
+    <table>
         <tr>
-            <td><input type="text" th:field="*{nameOfCategoryOfRecipe}"></td>
-            <td><input type="submit" value="Save new category"></td>
+            <th>Name</th>
         </tr>
-    </form>
-</table>
+        <tr th:each="category: ${allCategories}">
+            <td th:text="${category.nameOfCategoryOfRecipe}"></td>
+        </tr>
+        <form th:action="@{/category}" method="post" th:object="${newCategory}">
+            <tr>
+                <td><input type="text" th:field="*{nameOfCategoryOfRecipe}"></td>
+                <td><input type="submit" value="Save new category"></td>
+            </tr>
+        </form>
+    </table>
+</div>
+
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
+
 </body>
 </html>

@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
+<head th:replace="~{fragments/general :: baseheader(~{:: title})}">
     <meta charset="UTF-8">
-    <title th:text="|List of recipes in ${recipeBookToBeShown.nameOfRecipeBook}|"></title></head>
+    <title th:text="|List of recipes in ${recipeBookToBeShown.nameOfRecipeBook}|"></title>
+</head>
 <body>
-<h1>List of recipes in <span th:text="${recipeBookToBeShown.nameOfRecipeBook}"></span></h1>
-<table>
-    <tr th:each="recipe, iterationStatus: ${showAllRecipesInRecipeBook}">
-        <td th:text="${iterationStatus.count}"></td>
-        <td><a th:href="@{/recipe/detail/{name}(name = ${recipe.nameOfRecipe})}" th:text="${recipe.nameOfRecipe}"></a>
-        </td>
-        <td><a th:href="@{/book/detail/{name}/remove/{recipe}
+
+<div th:replace="~{fragments/general :: navbar}"></div>
+
+<div class="container">
+    <h1>List of recipes in <span th:text="${recipeBookToBeShown.nameOfRecipeBook}"></span></h1>
+    <table>
+        <tr th:each="recipe, iterationStatus: ${showAllRecipesInRecipeBook}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td><a th:href="@{/recipe/detail/{name}(name = ${recipe.nameOfRecipe})}" th:text="${recipe.nameOfRecipe}"></a>
+            </td>
+            <td><a th:href="@{/book/detail/{name}/remove/{recipe}
         (name = ${recipeBookToBeShown.nameOfRecipeBook},
         recipe = ${recipe.nameOfRecipe})}"><button>Remove <span th:text="${recipe.nameOfRecipe}"></span> from recipebook</button></a>
-        </td>
+            </td>
 
-    </tr>
-</table>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
+
 </body>
 </html>
