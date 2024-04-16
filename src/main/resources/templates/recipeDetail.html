@@ -39,6 +39,7 @@
             <td th:text="${ingredient.ingredient.measurementUnit.nameOfMeasurement}"></td>
             <td th:text="${ingredient.ingredient.nameIngredient.toLowerCase()}"></td>
         </li>
+        <td><a th:href="@{/recipe/detail/{name}/edit(name = ${recipeToBeShown.nameOfRecipe})}">Edit ingredients</a></td>
     </ul>
 </div>
 

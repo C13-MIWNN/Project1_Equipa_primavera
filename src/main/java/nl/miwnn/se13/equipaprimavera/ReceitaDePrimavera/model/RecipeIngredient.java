@@ -17,6 +17,15 @@ public class RecipeIngredient {
     private Ingredient ingredient;
     private int amountOfIngredient;
 
+    public RecipeIngredient(Recipe recipe, Ingredient ingredient, int amountOfIngredient) {
+        this.recipe = recipe;
+        this.ingredient = ingredient;
+        this.amountOfIngredient = amountOfIngredient;
+    }
+
+    public RecipeIngredient() {
+    }
+
     public Recipe getRecipe() {
         return recipe;
     }
