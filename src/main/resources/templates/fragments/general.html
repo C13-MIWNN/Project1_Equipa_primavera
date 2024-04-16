@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <title th:replace="${title}"></title>
 
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" href="/css/recipe.css"/>
 </head>
 <body>
 
 <div th:fragment="navbar">
-    <ul>
-        <li>
-            <a th:href="@{/recipe}">Recipes</a>
+    <ul class="nav justify-content-around">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/recipe}">Recipes</a>
         </li>
-        <li>
-            <a th:href="@{/ingredient}">List of ingredients</a>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/ingredient}">List of ingredients</a>
         </li>
-        <li>
-            <a th:href="@{/book}">Recipe books</a>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/book}">Recipe books</a>
         </li>
     </ul>
 </div>
@@ -27,7 +28,9 @@
 </div>
 
 <div th:fragment="bottomScripts">
-
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </div>
 
 </body>
