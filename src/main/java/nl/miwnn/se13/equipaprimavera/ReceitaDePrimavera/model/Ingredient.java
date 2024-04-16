@@ -2,6 +2,7 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,12 +18,12 @@ public class Ingredient {
     private String nameIngredient;
     @ManyToOne
     private MeasurementUnit measurementUnit;
-    private int amountOfIngredient;
+    @OneToMany(mappedBy = "ingredient")
+    private List<RecipeIngredient> recipeIngredient;
 
-    public Ingredient(String nameIngredient, MeasurementUnit measuringUnit, int amountOfIngredient) {
+    public Ingredient(String nameIngredient, MeasurementUnit measuringUnit) {
         this.nameIngredient = nameIngredient;
         this.measurementUnit = measuringUnit;
-        this.amountOfIngredient = amountOfIngredient;
     }
 
     public Ingredient() {
@@ -53,11 +54,11 @@ public class Ingredient {
         this.measurementUnit = measuringUnit;
     }
 
-    public int getAmountOfIngredient() {
-        return amountOfIngredient;
+    public List<RecipeIngredient> getRecipeIngredient() {
+        return recipeIngredient;
     }
 
-    public void setAmountOfIngredient(int amountOfIngredient) {
-        this.amountOfIngredient = amountOfIngredient;
+    public void setRecipeIngredient(List<RecipeIngredient> recipeIngredient) {
+        this.recipeIngredient = recipeIngredient;
     }
 }

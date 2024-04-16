@@ -23,11 +23,23 @@
 
     <form method="get" action="/book/add">
         <input type="hidden" name="nameRecipe" th:value="${recipeToBeShown.nameOfRecipe}">
-        Add recipe to:<select name="recipebook"><option th:each="recipebook: ${allRecipebooks}"
-                                                        th:text="${recipebook.nameOfRecipeBook}"
-                                                        th:value="${recipebook.recipeBookId}">
-    </option></select> <input type="submit" value="save"></a>
+        Add recipe to:<select name="recipebook">
+        <option th:each="recipebook: ${allRecipebooks}"
+                th:text="${recipebook.nameOfRecipeBook}"
+                th:value="${recipebook.recipeBookId}">
+        </option>
+    </select> <input type="submit" value="save" />
     </form>
+</div>
+<div>
+    <h2>Ingredients</h2>
+    <ul>
+        <li th:each="ingredient : ${recipeToBeShown.recipeIngredients}">
+            <td th:text="${ingredient.amountOfIngredient}"></td>
+            <td th:text="${ingredient.ingredient.measurementUnit.nameOfMeasurement}"></td>
+            <td th:text="${ingredient.ingredient.nameIngredient.toLowerCase()}"></td>
+        </li>
+    </ul>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>

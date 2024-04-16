@@ -2,8 +2,10 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.controller;
 
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.Recipe;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.RecipeBook;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.RecipeIngredient;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.CategoryOfRecipeRepository;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeBookRepository;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeIngredientRepository;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +30,13 @@ public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final CategoryOfRecipeRepository categoryOfRecipeRepository;
     private final RecipeBookRepository recipeBookRepository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, CategoryOfRecipeRepository categoryOfRecipeRepository, RecipeBookRepository recipeBookRepository) {
+    public RecipeController(RecipeRepository recipeRepository, CategoryOfRecipeRepository categoryOfRecipeRepository, RecipeBookRepository recipeBookRepository, RecipeIngredientRepository recipeIngredientRepository) {
         this.recipeRepository = recipeRepository;
         this.categoryOfRecipeRepository = categoryOfRecipeRepository;
         this.recipeBookRepository = recipeBookRepository;
+        this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
     @GetMapping({"/", "recipe"})
@@ -61,12 +65,14 @@ public class RecipeController {
     private String showRecipeDetails(@PathVariable("name") String name, Model model) {
         Optional<Recipe> recipe = recipeRepository.findByNameOfRecipe(name);
 
+
         if (recipe.isEmpty()) {
             return "redirect:/recipe";
         }
 
         model.addAttribute("recipeToBeShown", recipe.get());
         model.addAttribute("allRecipebooks", recipeBookRepository.findAll());
+//        model.addAttribute("allIngredients", recipeIngredientRepository. );
         return "recipeDetail";
     }
 }
