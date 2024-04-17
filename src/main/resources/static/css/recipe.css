@@ -1,3 +1,55 @@
 h1 {
+    text-align: center;
     color: mediumseagreen;
+    font-size: 60px;
+    padding: 20px 30px;
 }
+body {
+     background-color: #cefcdb;
+ }
+.btn-primary {
+    --bs-btn-bg: red;
+}
+.nav {
+    background-color: darkseagreen;
+}
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2BA;
+}
+
+.nav li {
+    float: left;
+}
+
+.nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.nav li a:hover {
+    background-color: #285;
+    color: #111;
+}
+.nav .active {
+    background-color: #1c5b39;
+}
+.container{
+    width: 75%;
+}
+.container_row {
+    display: flex;
+}
+.container_row > div {
+        width:50%;
+}
+
+
+

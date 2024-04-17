@@ -9,15 +9,18 @@
 </head>
 <body>
 
-<div th:fragment="navbar">
-    <ul class="nav justify-content-around">
-        <li class="nav-item">
+<div th:fragment="navbar(activeLink)">
+    <ul class="nav justify-content-center">
+        <li th:class="${#strings.equals(activeLink, 'Home')} ? 'nav-item active' : 'nav-item'">
+            <a th:class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li th:class="${#strings.equals(activeLink, 'Recipes')} ? 'nav-item active' : 'nav-item'">
             <a class="nav-link" th:href="@{/recipe}">Recipes</a>
         </li>
-        <li class="nav-item">
+        <li th:class="${#strings.equals(activeLink, 'Ingredients')} ? 'nav-item active' : 'nav-item'">
             <a class="nav-link" th:href="@{/ingredient}">List of ingredients</a>
         </li>
-        <li class="nav-item">
+        <li th:class="${#strings.equals(activeLink, 'Recipebooks')} ? 'nav-item active' : 'nav-item'">
             <a class="nav-link" th:href="@{/book}">Recipe books</a>
         </li>
     </ul>

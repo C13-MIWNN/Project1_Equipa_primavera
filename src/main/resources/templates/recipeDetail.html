@@ -6,41 +6,44 @@
 </head>
 <body>
 
-<div th:replace="~{fragments/general :: navbar}"></div>
+<div th:replace="~{fragments/general :: navbar('')}"></div>
 
 <div class="container">
-    <h1>Recipe for <span th:text="${recipeToBeShown.nameOfRecipe}"></span></h1>
+        <h1>Recipe for <span th:text="${recipeToBeShown.nameOfRecipe}"></span></h1>
 
-    <h2>Follow these steps:</h2>
-    <table>
-        <tr>
-            <th>Recipe in steps</th>
-        </tr>
-        // tekst van recept
+        <div class="container_row">
+            <div>
+                <h2>Follow these steps:</h2>
+                <table>
+                    <tr>
+                        <th>Recipe in steps</th>
+                    </tr>
+                    // tekst van recept
+                </table>
 
+                <form method="get" action="/book/add">
+                    <input type="hidden" name="nameRecipe" th:value="${recipeToBeShown.nameOfRecipe}">
+                    Add recipe to:<select name="recipebook">
+                    <option th:each="recipebook: ${allRecipebooks}"
+                            th:text="${recipebook.nameOfRecipeBook}"
+                            th:value="${recipebook.recipeBookId}">
+                    </option>
+                </select> <input type="submit" value="save" />
+                </form>
+            </div>
 
-    </table>
-
-    <form method="get" action="/book/add">
-        <input type="hidden" name="nameRecipe" th:value="${recipeToBeShown.nameOfRecipe}">
-        Add recipe to:<select name="recipebook">
-        <option th:each="recipebook: ${allRecipebooks}"
-                th:text="${recipebook.nameOfRecipeBook}"
-                th:value="${recipebook.recipeBookId}">
-        </option>
-    </select> <input type="submit" value="save" />
-    </form>
-</div>
-<div>
-    <h2>Ingredients</h2>
-    <ul>
-        <li th:each="ingredient : ${recipeToBeShown.recipeIngredients}">
-            <td th:text="${ingredient.amountOfIngredient}"></td>
-            <td th:text="${ingredient.ingredient.measurementUnit.nameOfMeasurement}"></td>
-            <td th:text="${ingredient.ingredient.nameIngredient.toLowerCase()}"></td>
-        </li>
-        <td><a th:href="@{/recipe/detail/{name}/edit(name = ${recipeToBeShown.nameOfRecipe})}">Edit ingredients</a></td>
-    </ul>
+            <div>
+                <h2>Ingredients</h2>
+                <ul>
+                    <li th:each="ingredient : ${recipeToBeShown.recipeIngredients}">
+                        <td th:text="${ingredient.amountOfIngredient}"></td>
+                        <td th:text="${ingredient.ingredient.measurementUnit.nameOfMeasurement}"></td>
+                        <td th:text="${ingredient.ingredient.nameIngredient.toLowerCase()}"></td>
+                    </li>
+                    <td><a th:href="@{/recipe/detail/{name}/edit(name = ${recipeToBeShown.nameOfRecipe})}">Edit ingredients</a></td>
+                </ul>
+            </div>
+        </div>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>
