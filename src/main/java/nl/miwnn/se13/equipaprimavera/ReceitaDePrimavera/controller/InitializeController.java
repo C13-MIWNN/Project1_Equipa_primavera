@@ -35,45 +35,46 @@ public class InitializeController {
 
     @GetMapping("/initialize")
     private String initializeDBRecipeAndRecipeBook() {
-        CategoryOfRecipe italiaans = makeCategoryOfRecipe("Italiaans");
-        CategoryOfRecipe aziatisch = makeCategoryOfRecipe("Aziatisch");
-        CategoryOfRecipe mexicaans = makeCategoryOfRecipe("Mexicaans");
+        CategoryOfRecipe italian = makeCategoryOfRecipe("Italian");
+        CategoryOfRecipe asian = makeCategoryOfRecipe("Asian");
+        CategoryOfRecipe mexican = makeCategoryOfRecipe("Mexican");
 
-        Recipe lasagne = makeRecipe("Lasagne", italiaans);
-        Recipe pizza = makeRecipe("Pizza", italiaans);
-        Recipe nasiGoreng = makeRecipe("Nasi Goreng", aziatisch);
-        Recipe tortilla = makeRecipe("Tortilla", mexicaans);
+        Recipe lasagne = makeRecipe("Lasagne", italian);
+        Recipe pizza = makeRecipe("Pizza", italian);
+        Recipe nasiGoreng = makeRecipe("Nasi Goreng", asian);
+        Recipe tortilla = makeRecipe("Tortilla", mexican);
 
-        RecipeBook mijnEersteReceptenboek = makeRecipeBook("Mijn eerste receptenboek", lasagne, pizza, nasiGoreng);
-        RecipeBook vegetarischeRecepten = makeRecipeBook("Vegetarische recepten", lasagne,pizza, nasiGoreng);
+        RecipeBook myFirstRecipebook = makeRecipeBook("My first recipebook", lasagne, pizza, nasiGoreng);
+        RecipeBook vegetarianRecipes = makeRecipeBook("Vegetarian recipes", lasagne,pizza, nasiGoreng);
 
-        MeasurementUnit gram = makeMeasurementUnit("gram");
-        MeasurementUnit milliliter = makeMeasurementUnit("milliliter");
-        MeasurementUnit stuk = makeMeasurementUnit("stuk");
-        MeasurementUnit theelepel = makeMeasurementUnit("theelepel");
-        MeasurementUnit eetlepel = makeMeasurementUnit("eetlepel");
+        MeasurementUnit gr = makeMeasurementUnit("gr");
+        MeasurementUnit ml = makeMeasurementUnit("ml");
+        MeasurementUnit x = makeMeasurementUnit(" x ");
+        MeasurementUnit tspn = makeMeasurementUnit("tspn");
+        MeasurementUnit tbsp = makeMeasurementUnit("tbsp");
+        MeasurementUnit pinch = makeMeasurementUnit("pinch");
 
-        Ingredient lasagnebladen = makeIngredient("Lasagnebladen", stuk);
-        Ingredient gehakt = makeIngredient("Gehakt", gram);
-        Ingredient paprika = makeIngredient("Paprika", stuk);
-        Ingredient ui = makeIngredient("Ui", stuk);
-        Ingredient champignons = makeIngredient("Champignons", gram);
-        Ingredient tomatenblokjes = makeIngredient("Tomatenblokjes", gram);
-        Ingredient oregano = makeIngredient("Oregano", theelepel);
-        Ingredient paprikapoeder = makeIngredient("Paprikapoeder", theelepel);
-        Ingredient cayennePoeder = makeIngredient("Cayenne poeder", theelepel);
-        Ingredient geraspteKaas = makeIngredient("Geraspte kaas", gram);
+        Ingredient lasagnaSheets = makeIngredient("Lasagna sheets", x);
+        Ingredient groundBeef = makeIngredient("Ground beef", gr);
+        Ingredient paprika = makeIngredient("Paprika", x);
+        Ingredient onion = makeIngredient("Onion", x);
+        Ingredient mushroom = makeIngredient("Mushroom", gr);
+        Ingredient crushedTomatos = makeIngredient("Crushed tomatos", gr);
+        Ingredient oregano = makeIngredient("Oregano", tspn);
+        Ingredient paprikapowder = makeIngredient("Paprikapowder", tspn);
+        Ingredient cayennepowder = makeIngredient("Cayennepowder", tspn);
+        Ingredient gradedCheese = makeIngredient("Graded cheese", gr);
 
-        RecipeIngredient lasagneLasagnebladen = makeRecipeIngredient(lasagne, lasagnebladen, 12);
-        RecipeIngredient lasagneGehakt = makeRecipeIngredient(lasagne, gehakt, 300);
+        RecipeIngredient lasagneLasagnebladen = makeRecipeIngredient(lasagne, lasagnaSheets, 12);
+        RecipeIngredient lasagneGehakt = makeRecipeIngredient(lasagne, groundBeef, 300);
         RecipeIngredient lasagnePaprika = makeRecipeIngredient(lasagne, paprika, 2);
-        RecipeIngredient lasagneUi = makeRecipeIngredient(lasagne, ui, 1);
-        RecipeIngredient lasagneChampignons = makeRecipeIngredient(lasagne, champignons, 250);
-        RecipeIngredient lasagneTomatenblokjes = makeRecipeIngredient(lasagne, tomatenblokjes, 750);
+        RecipeIngredient lasagneUi = makeRecipeIngredient(lasagne, onion, 1);
+        RecipeIngredient lasagneChampignons = makeRecipeIngredient(lasagne, mushroom, 250);
+        RecipeIngredient lasagneTomatenblokjes = makeRecipeIngredient(lasagne, crushedTomatos, 750);
         RecipeIngredient lasagneOregano = makeRecipeIngredient(lasagne, oregano, 1);
-        RecipeIngredient lasagnePaprikapoeder = makeRecipeIngredient(lasagne, paprikapoeder, 1);
-        RecipeIngredient lasagneCayennePoeder = makeRecipeIngredient(lasagne, cayennePoeder, 1);
-        RecipeIngredient lasagneGeraspteKaas = makeRecipeIngredient(lasagne, geraspteKaas, 50);
+        RecipeIngredient lasagnePaprikapoeder = makeRecipeIngredient(lasagne, paprikapowder, 1);
+        RecipeIngredient lasagneCayennePoeder = makeRecipeIngredient(lasagne, cayennepowder, 1);
+        RecipeIngredient lasagneGeraspteKaas = makeRecipeIngredient(lasagne, gradedCheese, 50);
 
 
         return "redirect:/";
