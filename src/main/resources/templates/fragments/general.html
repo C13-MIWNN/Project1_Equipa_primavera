@@ -18,7 +18,7 @@
             <a class="nav-link" th:href="@{/recipe}">Recipes</a>
         </li>
         <li th:class="${#strings.equals(activeLink, 'Ingredients')} ? 'nav-item active' : 'nav-item'">
-            <a class="nav-link" th:href="@{/ingredient}">List of ingredients</a>
+            <a class="nav-link" th:href="@{/ingredient}">Ingredients</a>
         </li>
         <li th:class="${#strings.equals(activeLink, 'Recipebooks')} ? 'nav-item active' : 'nav-item'">
             <a class="nav-link" th:href="@{/book}">Recipe books</a>
