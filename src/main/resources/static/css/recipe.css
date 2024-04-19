@@ -8,7 +8,7 @@ body {
      background-color: #cefcdb;
  }
 .btn-primary {
-    --bs-btn-bg: red;
+    --bs-btn-bg: #1c5b39;
 }
 .nav {
     background-color: darkseagreen;
