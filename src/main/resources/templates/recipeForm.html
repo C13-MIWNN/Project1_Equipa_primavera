@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div th:replace="~{fragments/general :: navbar('Recipes')}"></div>
+<div th:replace="~{fragments/general :: navbar('')}"></div>
 
 <div class="container">
     <h1>Create a new recipe</h1>
@@ -23,7 +23,7 @@
                     <input type="text" id="nameRecipeField" th:field="*{nameOfRecipe}">
                 </td>
                 <td>
-                    <select id="categoryRecipeField" th:field="*{categoryOfRecipe}" multiple>
+                    <select id="categoryRecipeField" th:field="*{categoryOfRecipe}">
                         <option th:each="category: ${allCategories}"
                                 th:text="${category.nameOfCategoryOfRecipe}"
                                 th:value="${category.categoryOfRecipeId}">
@@ -32,7 +32,9 @@
                 </td>
             </tr>
         </table>
-        <div><textarea id="stepsOfRecipeField" th:field="*{stepsOfRecipe}"></textarea></div>
+        <span>Steps</span>
+        <div><textarea style="width:100%"  id="stepsOfRecipeField" th:field="*{stepsOfRecipe}"></textarea></div>
+
         <input type="submit" value="Save recipe">
     </form>
 </div>

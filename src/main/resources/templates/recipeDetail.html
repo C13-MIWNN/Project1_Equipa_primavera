@@ -29,7 +29,7 @@
             <h6><a th:href="@{/recipe/detail/{name}/edit(name = ${recipeToBeShown.nameOfRecipe})}">Edit steps</a></h6>
         </div>
 
-        <div>
+        <div th:align="center">
             <h2>Ingredients</h2>
             <table>
                 <tr th:each="ingredient : ${recipeToBeShown.recipeIngredients}">
