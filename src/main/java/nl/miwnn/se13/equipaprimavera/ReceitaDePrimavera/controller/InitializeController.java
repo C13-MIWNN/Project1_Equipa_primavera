@@ -35,14 +35,34 @@ public class InitializeController {
 
     @GetMapping("/initialize")
     private String initializeDBRecipeAndRecipeBook() {
+        String loremIpsum = new String("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" +
+                "incididunt ut labore et dolore magna aliqua. Nulla aliquet enim tortor at auctor urna nunc id cursus. " +
+                "Nunc sed blandit libero volutpat sed cras ornare. Tellus integer feugiat scelerisque varius morbi enim." +
+                " Sit amet volutpat consequat mauris nunc congue. Egestas egestas fringilla phasellus faucibus " +
+                "scelerisque eleifend. Interdum posuere lorem ipsum dolor sit amet. Egestas diam in arcu cursus euismod " +
+                "quis viverra nibh. Montes nascetur ridiculus mus mauris vitae. Semper auctor neque vitae tempus quam " +
+                "pellentesque nec.\n" +
+                "\n" +
+                "Et odio pellentesque diam volutpat commodo sed. Ultrices vitae auctor eu augue ut lectus arcu bibendum." +
+                " Odio pellentesque diam volutpat commodo sed egestas. Quis auctor elit sed vulputate mi sit amet. " +
+                "Bibendum at varius vel pharetra vel turpis. Vitae justo eget magna fermentum iaculis eu non diam. " +
+                "Ac ut consequat semper viverra nam libero justo laoreet. Ultrices gravida dictum fusce ut placerat " +
+                "orci nulla pellentesque dignissim. Amet commodo nulla facilisi nullam. Mauris a diam maecenas sed enim " +
+                "ut sem viverra. Eleifend mi in nulla posuere sollicitudin aliquam. Integer quis auctor elit sed " +
+                "vulputate. Nullam ac tortor vitae purus faucibus ornare suspendisse. Id venenatis a condimentum vitae " +
+                "sapien pellentesque habitant. Ipsum dolor sit amet consectetur adipiscing elit ut aliquam purus. " +
+                "Aliquet enim tortor at auctor urna nunc id cursus. Et ultrices neque ornare aenean euismod elementum " +
+                "nisi quis eleifend. Dictum fusce ut placerat orci nulla pellentesque dignissim enim. Mi in nulla " +
+                "posuere sollicitudin aliquam ultrices. Aliquam sem fringilla ut morbi tincidunt augue interdum velit.");
+
         CategoryOfRecipe italian = makeCategoryOfRecipe("Italian");
         CategoryOfRecipe asian = makeCategoryOfRecipe("Asian");
         CategoryOfRecipe mexican = makeCategoryOfRecipe("Mexican");
 
-        Recipe lasagne = makeRecipe("Lasagne", italian);
-        Recipe pizza = makeRecipe("Pizza", italian);
-        Recipe nasiGoreng = makeRecipe("Nasi Goreng", asian);
-        Recipe tortilla = makeRecipe("Tortilla", mexican);
+        Recipe lasagne = makeRecipe("Lasagne", loremIpsum, italian);
+        Recipe pizza = makeRecipe("Pizza", loremIpsum, italian);
+        Recipe nasiGoreng = makeRecipe("Nasi Goreng", loremIpsum, asian);
+        Recipe tortilla = makeRecipe("Tortilla", loremIpsum, mexican);
 
         RecipeBook myFirstRecipebook = makeRecipeBook("My first recipebook", lasagne, pizza, nasiGoreng);
         RecipeBook vegetarianRecipes = makeRecipeBook("Vegetarian recipes", lasagne,pizza, nasiGoreng);
@@ -104,9 +124,10 @@ public class InitializeController {
         return recipeBook;
     }
 
-    private Recipe makeRecipe(String nameRecipe, CategoryOfRecipe categoryOfRecipe) {
+    private Recipe makeRecipe(String nameRecipe, String stepsOfRecipe, CategoryOfRecipe categoryOfRecipe) {
         Recipe recipe = new Recipe();
         recipe.setNameOfRecipe(nameRecipe);
+        recipe.setStepsOfRecipe(stepsOfRecipe);
 
         Set<CategoryOfRecipe> categoryOfRecipeSet = new HashSet<>();
         categoryOfRecipeSet.add(categoryOfRecipe);

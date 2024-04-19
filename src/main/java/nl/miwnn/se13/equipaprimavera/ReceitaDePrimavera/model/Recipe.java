@@ -18,6 +18,7 @@ public class Recipe {
     @Column(unique = true)
     private String nameOfRecipe;
     //    @ElementCollection @OrderColumn Misschien later toch weer aan de praat krijgen met DTO
+    @Column(columnDefinition = "LONGTEXT")
     private String stepsOfRecipe;
     @OneToMany(mappedBy = "recipe")
     private List<RecipeIngredient> recipeIngredients;

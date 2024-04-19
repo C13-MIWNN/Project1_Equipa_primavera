@@ -25,12 +25,8 @@
     <div class="container_row">
         <div>
             <h2>Follow these steps:</h2>
-            <table>
-                <tr>
-                    <th>Recipe in steps</th>
-                </tr>
-                // tekst van recept
-            </table>
+            <span th:text="${recipeToBeShown.stepsOfRecipe}"></span>
+            <h6><a th:href="@{/recipe/detail/{name}/edit(name = ${recipeToBeShown.nameOfRecipe})}">Edit steps</a></h6>
         </div>
 
         <div>
