@@ -21,7 +21,7 @@
         <form th:action="@{/book}" method="post" th:object="${newRecipeBook}">
             <tr>
                 <td><input type="text" th:field="*{nameOfRecipeBook}"></td>
-                <td><input type="submit" value="Save new recipebook"></td>
+                <td><input class="btn btn-primary" type="submit" value="Save new recipebook"></td>
             </tr>
         </form>
     </table>
