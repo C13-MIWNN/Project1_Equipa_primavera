@@ -33,17 +33,12 @@ public class IngredientController {
     @GetMapping("/ingredient")
     private String showIngredientOverview(Model model) {
         model.addAttribute("allIngredients", ingredientRepository.findAll());
+        model.addAttribute("newIngredient", new Ingredient());
+        model.addAttribute("allMeasurementTypes", measurementUnitRepository.findAll());
         return "ingredientOverview";
     }
 
-    @GetMapping("/ingredient/new")
-    private String showIngredientForm(Model model) {
-        model.addAttribute("ingredient", new Ingredient());
-        model.addAttribute("allMeasurementTypes", measurementUnitRepository.findAll());
-        return "ingredientForm";
-    }
-
-    @PostMapping("/ingredient/new")
+    @PostMapping( "/ingredient")
     private String saveIngredient(@ModelAttribute("ingredient") Ingredient ingredientToBeSaved,
                                   BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {

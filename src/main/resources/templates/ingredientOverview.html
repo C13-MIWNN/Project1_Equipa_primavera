@@ -11,18 +11,43 @@
 <div class="container">
     <h1>Overview of ingredients</h1>
 
-    <table>
-        <tr>
-            <th>Name</th>
-        </tr>
-        <tr th:each="ingredient : ${allIngredients}">
-            <td th:text="${ingredient.nameIngredient}"></td>
-        </tr>
+    <div class="container_row">
+        <div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                </tr>
+                <tr th:each="ingredient : ${allIngredients}">
+                    <td th:text="${ingredient.nameIngredient}"></td>
+                </tr>
+            </table>
+        </div>
 
-    </table>
-    <p>
-        <a th:href="@{/ingredient/new}">Add a new ingredient</a>
-    </p>
+        <div>
+            <form th:action="@{/ingredient}" method="post" th:object="${newIngredient}">
+                <table>
+                    <tr>
+                        <td><label for="measurementUnitField">Unit</label></td>
+                        <td><label for="nameIngredientField">Name</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="btn btn-primary" id="measurementUnitField" th:field="*{measurementUnit}">
+                                <option th:each="measurement: ${allMeasurementTypes}"
+                                        th:text="${measurement.nameOfMeasurement}"
+                                        th:value="${measurement.measurementUnitId}">
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="nameIngredientField" th:field="*{nameIngredient}">
+                        </td>
+                    </tr>
+                </table>
+                <input class="btn btn-primary" type="submit" value="Save ingredient">
+            </form>
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>
