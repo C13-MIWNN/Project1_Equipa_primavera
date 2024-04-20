@@ -55,6 +55,10 @@ public class RecipeController {
     @PostMapping("recipe/new")
     private String saveRecipe(@ModelAttribute("recipe") Recipe recipeToBeSaved,
                               BindingResult bindingResult) {
+        if (recipeToBeSaved.getRecipeId()==null &&
+                recipeRepository.findByNameOfRecipe(recipeToBeSaved.getNameOfRecipe()).isPresent()) {
+            return "redirect:/recipe/new";
+        }
         if (!bindingResult.hasErrors()) {
             recipeRepository.save(recipeToBeSaved);
         }
@@ -72,7 +76,17 @@ public class RecipeController {
 
         model.addAttribute("recipeToBeShown", recipe.get());
         model.addAttribute("allRecipebooks", recipeBookRepository.findAll());
-//        model.addAttribute("allIngredients", recipeIngredientRepository. );
         return "recipeDetail";
     }
-}
+
+    @GetMapping("/recipe/detail/{name}/edit")
+    private String showEditRecipeForm(@PathVariable("name") String name, Model model) {
+        Optional<Recipe> recipe = recipeRepository.findByNameOfRecipe(name);
+        if (recipe.isEmpty()) {
+            return "redirect:/recipe";
+        }
+        model.addAttribute("recipe", recipe.get());
+        model.addAttribute("allCategories", categoryOfRecipeRepository.findAll());
+        return "recipeForm";
+    }
+    }
