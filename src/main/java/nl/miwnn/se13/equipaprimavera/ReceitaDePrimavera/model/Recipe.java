@@ -2,6 +2,7 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class Recipe {
     @Column(columnDefinition = "LONGTEXT")
     private String stepsOfRecipe;
     @OneToMany(mappedBy = "recipe")
-    private List<RecipeIngredient> recipeIngredients;
+    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
     @ManyToMany
     private Set<CategoryOfRecipe> categoryOfRecipe;
 
@@ -31,7 +32,12 @@ public class Recipe {
         this.categoryOfRecipe = categoryOfRecipe;
     }
 
+
     public Recipe() {
+    }
+
+    public int getTotalNumberOfRecipeIngredients(){
+        return recipeIngredients.size();
     }
 
     @Override

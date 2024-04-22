@@ -26,9 +26,10 @@ class ExampleTest {
 
 
 //    @Test // kan je testen of het aantal en/of de namen van de toegevoegde recipes in een recipebook kloppen?
+//
 //    @DisplayName("Should check all items in the list")
 //    void shouldCheckAllRecipesInTheRecipeBook() {
-//        List<Recipe> recipeList = List.of(, rec, 5, 7);
+//        List<Recipe> recipeList = List.of(re, , 5, 7);
 //
 //        Assertions.assertAll(() -> assertEquals(2, recipeList.get(0)),
 //                () -> assertEquals(, recipeList.get(1)),
