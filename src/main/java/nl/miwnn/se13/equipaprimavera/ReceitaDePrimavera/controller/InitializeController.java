@@ -2,6 +2,9 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.controller;
 
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.*;
 import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.*;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.services.EquipaPrimaveraUserService;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -19,22 +22,38 @@ public class InitializeController {
     private final IngredientRepository ingredientRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
 
+    private final EquipaPrimaveraUserService equipaPrimaveraUserService;
+
     public InitializeController(CategoryOfRecipeRepository categoryOfRecipeRepository,
                                 RecipeRepository recipeRepository,
                                 RecipeBookRepository recipeBookRepository,
                                 MeasurementUnitRepository measurementUnitRepository,
                                 IngredientRepository ingredientRepository,
-                                RecipeIngredientRepository recipeIngredientRepository) {
+                                RecipeIngredientRepository recipeIngredientRepository,
+                                EquipaPrimaveraUserService equipaPrimaveraUserService) {
         this.categoryOfRecipeRepository = categoryOfRecipeRepository;
         this.recipeRepository = recipeRepository;
         this.recipeBookRepository = recipeBookRepository;
         this.measurementUnitRepository = measurementUnitRepository;
         this.ingredientRepository = ingredientRepository;
         this.recipeIngredientRepository = recipeIngredientRepository;
+        this.equipaPrimaveraUserService = equipaPrimaveraUserService;
+    }
+
+    @EventListener
+    private void seed(ContextRefreshedEvent event) {
+        if (equipaPrimaveraUserService.isNotInitialized()) {
+            initializeDBRecipeAndRecipeBook();
+        }
     }
 
     @GetMapping("/initialize")
     private String initializeDBRecipeAndRecipeBook() {
+        makeEquipaPrimaveraUser("Bram", "Bram");
+        makeEquipaPrimaveraUser("Mirjam", "Mirjam");
+        makeEquipaPrimaveraUser("Vincent", "Vincent");
+
+
         String loremIpsum = new String("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" +
                 "incididunt ut labore et dolore magna aliqua. Nulla aliquet enim tortor at auctor urna nunc id cursus. " +
                 "Nunc sed blandit libero volutpat sed cras ornare. Tellus integer feugiat scelerisque varius morbi enim." +
@@ -154,5 +173,13 @@ public class InitializeController {
         RecipeIngredient recipeIngredient = new RecipeIngredient(recipe, ingredient, amountOfIngredient);
         recipeIngredientRepository.save(recipeIngredient);
         return recipeIngredient;
+    }
+
+    private EquipaPrimaveraUser makeEquipaPrimaveraUser(String username, String password) {
+        EquipaPrimaveraUser user = new EquipaPrimaveraUser();
+        user.setUsername(username);
+        user.setPassword(password);
+        equipaPrimaveraUserService.saveUser(user);
+        return user;
     }
 }
