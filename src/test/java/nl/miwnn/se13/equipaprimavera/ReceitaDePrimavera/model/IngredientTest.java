@@ -4,9 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +23,7 @@ class IngredientTest {
         int expectedTotalRecipeIngredients = 0;
 
         //Act
-        int actualTotalIngredients = recipe.getTotalNumberOfRecipeIngredients();
+        int actualTotalIngredients = recipe.totalNumberOfRecipeIngredients();
 
         // Assert
         assertEquals(expectedTotalRecipeIngredients, actualTotalIngredients);
@@ -53,7 +51,7 @@ class IngredientTest {
         int expectedTotalOfIngredientsForThisRecipe = 3;
 
         // Act
-        int actualTotal = recipe.getTotalNumberOfRecipeIngredients();
+        int actualTotal = recipe.totalNumberOfRecipeIngredients();
 
         // Assert
         assertEquals(expectedTotalOfIngredientsForThisRecipe, actualTotal);

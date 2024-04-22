@@ -31,6 +31,7 @@
 
         <div th:align="center">
             <h2>Ingredients</h2>
+            <h3 th:text="|Total number of ingredients: ${recipeToBeShown.totalNumberOfRecipeIngredients()}|"></h3>
             <table>
                 <tr th:each="ingredient : ${recipeToBeShown.recipeIngredients}">
                     <td th:align="right" th:text="${ingredient.amountOfIngredient}"></td>

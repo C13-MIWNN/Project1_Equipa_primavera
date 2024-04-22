@@ -36,7 +36,7 @@ public class Recipe {
     public Recipe() {
     }
 
-    public int getTotalNumberOfRecipeIngredients(){
+    public int totalNumberOfRecipeIngredients(){
         return recipeIngredients.size();
     }
 
