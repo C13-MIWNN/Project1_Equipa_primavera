@@ -1,8 +1,9 @@
 package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Mirjam Schmitz
@@ -13,17 +14,27 @@ import jakarta.persistence.Id;
 public class Ingredient {
     @Id @GeneratedValue
     private Long ingredientId;
+    @Column(unique = true)
     private String nameIngredient;
-    private String measuringUnit;
-    private int amountOfIngredient;
+    @ManyToOne
+    private MeasurementUnit measurementUnit;
+    @OneToMany(mappedBy = "ingredient")
+    private List<RecipeIngredient> recipeIngredient;
 
-    public Ingredient(String nameIngredient, String measuringUnit, int amountOfIngredient) {
+    public Ingredient(String nameIngredient, MeasurementUnit measuringUnit) {
         this.nameIngredient = nameIngredient;
-        this.measuringUnit = measuringUnit;
-        this.amountOfIngredient = amountOfIngredient;
+        this.measurementUnit = measuringUnit;
     }
 
     public Ingredient() {
+    }
+
+    public Long getIngredientId() {
+        return ingredientId;
+    }
+
+    public void setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
     }
 
     public String getNameIngredient() {
@@ -35,19 +46,19 @@ public class Ingredient {
         this.nameIngredient = nameIngredient;
     }
 
-    public String getMeasuringUnit() {
-        return measuringUnit;
+    public MeasurementUnit getMeasurementUnit() {
+        return measurementUnit;
     }
 
-    public void setMeasuringUnit(String measuringUnit) {
-        this.measuringUnit = measuringUnit;
+    public void setMeasurementUnit(MeasurementUnit measuringUnit) {
+        this.measurementUnit = measuringUnit;
     }
 
-    public int getAmountOfIngredient() {
-        return amountOfIngredient;
+    public List<RecipeIngredient> getRecipeIngredient() {
+        return recipeIngredient;
     }
 
-    public void setAmountOfIngredient(int amountOfIngredient) {
-        this.amountOfIngredient = amountOfIngredient;
+    public void setRecipeIngredient(List<RecipeIngredient> recipeIngredient) {
+        this.recipeIngredient = recipeIngredient;
     }
 }
