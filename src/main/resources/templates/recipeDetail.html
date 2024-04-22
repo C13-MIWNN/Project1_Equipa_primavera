@@ -32,10 +32,10 @@
         <div th:align="center">
             <h2>Ingredients</h2>
             <table>
-                <tr th:each="ingredient : ${recipeToBeShown.recipeIngredients}">
+                <tr th:each="ingredient : ${recipeToBeShown.rows}">
                     <td th:align="right" th:text="${ingredient.amountOfIngredient}"></td>
-                    <td th:align="center" th:text="${ingredient.ingredient.measurementUnit.nameOfMeasurement}"></td>
-                    <td th:text="${ingredient.ingredient.nameIngredient.toLowerCase()}"></td>
+                    <td th:align="center" th:text="${ingredient.measurementUnit}"></td>
+                    <td th:text="${ingredient.nameOfIngredient.toLowerCase()}"></td>
                 </tr>
                 <tr>
                     <td></td>

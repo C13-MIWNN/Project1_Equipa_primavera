@@ -2,6 +2,7 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -25,10 +26,14 @@ public class Recipe {
     @ManyToMany
     private Set<CategoryOfRecipe> categoryOfRecipe;
 
-    public Recipe(String nameOfRecipe, String stepsOfRecipe, Set<CategoryOfRecipe> categoryOfRecipe) {
+    @OneToMany(mappedBy = "recipe")
+    private List<IngredientRow> rows = new ArrayList<>();
+
+    public Recipe(String nameOfRecipe, String stepsOfRecipe, Set<CategoryOfRecipe> categoryOfRecipe, List<IngredientRow> rows) {
         this.nameOfRecipe = nameOfRecipe;
         this.stepsOfRecipe = stepsOfRecipe;
         this.categoryOfRecipe = categoryOfRecipe;
+        this.rows = rows;
     }
 
     public Recipe() {
@@ -85,5 +90,13 @@ public class Recipe {
 
     public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
+    }
+
+    public List<IngredientRow> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<IngredientRow> rows) {
+        this.rows = rows;
     }
 }

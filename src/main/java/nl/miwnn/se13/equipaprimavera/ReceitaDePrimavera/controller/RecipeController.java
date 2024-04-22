@@ -1,22 +1,13 @@
 package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.controller;
 
-import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.Recipe;
-import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.RecipeBook;
-import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.RecipeIngredient;
-import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.CategoryOfRecipeRepository;
-import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeBookRepository;
-import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeIngredientRepository;
-import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.RecipeRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model.*;
+import nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,13 +21,28 @@ public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final CategoryOfRecipeRepository categoryOfRecipeRepository;
     private final RecipeBookRepository recipeBookRepository;
-    private final RecipeIngredientRepository recipeIngredientRepository;
+    private final IngredientRepository ingredientRepository;
+    private final MeasurementUnitRepository measurementUnitRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, CategoryOfRecipeRepository categoryOfRecipeRepository, RecipeBookRepository recipeBookRepository, RecipeIngredientRepository recipeIngredientRepository) {
+    public RecipeController(RecipeRepository recipeRepository, CategoryOfRecipeRepository categoryOfRecipeRepository, RecipeBookRepository recipeBookRepository, IngredientRepository ingredientRepository, MeasurementUnitRepository measurementUnitRepository) {
         this.recipeRepository = recipeRepository;
         this.categoryOfRecipeRepository = categoryOfRecipeRepository;
         this.recipeBookRepository = recipeBookRepository;
-        this.recipeIngredientRepository = recipeIngredientRepository;
+        this.ingredientRepository = ingredientRepository;
+        this.measurementUnitRepository = measurementUnitRepository;
+    }
+
+    @ModelAttribute("allIngredients")
+    public List<Ingredient> allIngredients() {
+        return ingredientRepository.findAll();
+    }
+    @ModelAttribute("allCategories")
+    public List<CategoryOfRecipe> allCategories() {
+        return categoryOfRecipeRepository.findAll();
+    }
+    @ModelAttribute("allMeasurementUnit")
+    public List<MeasurementUnit> allMeasurementUnits() {
+        return measurementUnitRepository.findAll();
     }
 
     @GetMapping({"/", "recipe"})
@@ -48,7 +54,6 @@ public class RecipeController {
     @GetMapping("/recipe/new")
     private String showRecipeForm(Model model) {
         model.addAttribute("recipe", new Recipe());
-        model.addAttribute("allCategories", categoryOfRecipeRepository.findAll());
         return "recipeForm";
     }
 
@@ -62,7 +67,13 @@ public class RecipeController {
         if (!bindingResult.hasErrors()) {
             recipeRepository.save(recipeToBeSaved);
         }
-        return "redirect:/recipe";
+
+//        for (IngredientRow row : recipeToBeSaved.getRows()) {
+//            ingredientRepository.findById(row.getNameOfIngredient())
+//
+//        }
+
+        return String.format("redirect:/recipe/detail/%s", recipeToBeSaved.getNameOfRecipe());
     }
 
     @GetMapping("/recipe/detail/{name}")
@@ -89,4 +100,20 @@ public class RecipeController {
         model.addAttribute("allCategories", categoryOfRecipeRepository.findAll());
         return "recipeForm";
     }
+
+    @RequestMapping(value="/recipe/new", params={"addRow"})
+    public String addRow(final Recipe recipe, final BindingResult bindingResult) {
+        IngredientRow row = new IngredientRow();
+        row.setRecipe(recipe);
+        recipe.getRows().add(new IngredientRow());
+        return "recipeForm";
     }
+
+
+    @RequestMapping(value="/recipe/new", params={"removeRow"})
+    public String removeRow(final Recipe recipe, final BindingResult bindingResult, final HttpServletRequest req) {
+        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+        recipe.getRows().remove(rowId.intValue());
+        return "recipeForm";
+    }
+}

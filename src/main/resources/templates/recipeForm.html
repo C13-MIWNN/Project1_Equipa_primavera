@@ -10,9 +10,10 @@
 <div th:replace="~{fragments/general :: navbar('Recipes')}"></div>
 
 <div class="container">
-    <h1>Create a new recipe</h1>
+    <h1>Create or edit a recipe</h1>
 
     <form th:action="@{/recipe/new}" method="post" th:object="${recipe}">
+        <fieldset>
         <input type="hidden" th:field="*{recipeId}">
         <table>
             <tr>
@@ -36,7 +37,42 @@
         <span>Steps</span>
         <div><textarea style="width:100%"  id="stepsOfRecipeField" th:field="*{stepsOfRecipe}"></textarea></div>
 
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th></th>
+                    <th>Ingredient</th>
+                    <th>
+                        <button class="btn btn-primary" type="submit" name="addRow">Add ingredient</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row, rowStat : *{rows}">
+                    <td>
+                        <input type="number" th:field="*{rows[__${rowStat.index}__].amountOfIngredient}"/>
+                    </td>
+                    <td>
+                        <select class="btn btn-primary" th:field="*{rows[__${rowStat.index}__].measurementUnit}">
+                            <option th:each="var : ${allMeasurementUnit}" th:text="${var.nameOfMeasurement}" th:value="${var.measurementUnitId}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{rows[__${rowStat.index}__].nameOfIngredient}">
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" type="submit" name="removeRow" th:value="${rowStat.index}">Remove ingredient</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
         <input class="btn btn-primary" type="submit" value="Save recipe">
+        </fieldset>
     </form>
 </div>
 
