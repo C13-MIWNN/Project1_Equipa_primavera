@@ -21,7 +21,7 @@ public class EquipaPrimaveraSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/recipe").permitAll()
+                        .requestMatchers("/").permitAll()
                         .requestMatchers("/webjars/**", "/css/**").permitAll()
                         .anyRequest().authenticated()
                 )
