@@ -3,6 +3,9 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 /**
  * @author Bram van Ham
@@ -14,12 +17,8 @@ public class MeasurementUnit {
     private Long measurementUnitId;
     private String nameOfMeasurement;
 
-    public MeasurementUnit(String nameOfMeasurement) {
-        this.nameOfMeasurement = nameOfMeasurement;
-    }
-    public MeasurementUnit() {
-
-    }
+    @OneToMany (mappedBy = "measurementUnit")
+    List<Ingredient>ingredients;
 
     public Long getMeasurementUnitId() {
         return measurementUnitId;
@@ -35,5 +34,13 @@ public class MeasurementUnit {
 
     public void setNameOfMeasurement(String nameOfMeasurement) {
         this.nameOfMeasurement = nameOfMeasurement;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

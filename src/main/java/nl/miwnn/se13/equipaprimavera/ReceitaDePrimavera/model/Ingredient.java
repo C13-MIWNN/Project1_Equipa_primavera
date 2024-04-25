@@ -2,6 +2,7 @@ package nl.miwnn.se13.equipaprimavera.ReceitaDePrimavera.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,7 +20,8 @@ public class Ingredient {
     @ManyToOne
     private MeasurementUnit measurementUnit;
     @OneToMany(mappedBy = "ingredient")
-    private List<RecipeIngredient> recipeIngredient;
+    private List<RecipeIngredient> recipeIngredient = new ArrayList<>();
+
 
     public Ingredient(String nameIngredient, MeasurementUnit measuringUnit) {
         this.nameIngredient = nameIngredient;
