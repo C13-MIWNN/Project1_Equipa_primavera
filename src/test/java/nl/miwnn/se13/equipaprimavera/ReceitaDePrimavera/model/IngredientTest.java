@@ -31,14 +31,14 @@ class IngredientTest {
 
     @Test
     @DisplayName("Total of ingredients for this recipe is three")
-    void totalOfIngredientsForThisRecipeIsTree() {
+    void totalOfIngredientsForThisRecipeIsThree() {
         //Arrange
         Recipe recipe = new Recipe();
         recipe.setNameOfRecipe("Lasagna");
 
-        Ingredient ingredient = new Ingredient("salt", new MeasurementUnit("gr"));
-        Ingredient ingredient2 = new Ingredient("water", new MeasurementUnit("ml"));
-        Ingredient ingredient3 = new Ingredient("sugar", new MeasurementUnit("gr"));
+        Ingredient ingredient = new Ingredient("salt", makeMeasurementUnit("gr"));
+        Ingredient ingredient2 = new Ingredient("water", makeMeasurementUnit("ml"));
+        Ingredient ingredient3 = new Ingredient("sugar", makeMeasurementUnit("gr"));
 
         List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
@@ -49,18 +49,21 @@ class IngredientTest {
         recipe.setRecipeIngredients(recipeIngredients);
 
         int expectedTotalOfIngredientsForThisRecipe = 3;
+        int notExpectedTotalOfIngredientsForThisRecipe = 4;
 
         // Act
         int actualTotal = recipe.totalNumberOfRecipeIngredients();
 
         // Assert
         assertEquals(expectedTotalOfIngredientsForThisRecipe, actualTotal);
-
+        assertNotEquals(notExpectedTotalOfIngredientsForThisRecipe, actualTotal);
 
     }
 
-
-
-
+    private MeasurementUnit makeMeasurementUnit(String nameMeasurementUnit) {
+        MeasurementUnit measurementUnit = new MeasurementUnit();
+        measurementUnit.setNameOfMeasurement(nameMeasurementUnit);
+        return measurementUnit;
+    }
 
 }
