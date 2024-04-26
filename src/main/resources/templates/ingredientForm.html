@@ -2,32 +2,56 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="~{fragments/general :: baseheader(~{:: title})}">
     <meta charset="UTF-8">
-    <title>Put a title here</title>
+    <title>Create a new ingredient</title>
 </head>
 <body>
 
-<div th:replace="~{fragments/general :: navbar}"></div>
+<div th:replace="~{fragments/general :: navbar('ingredient')}"></div>
 
 <div class="container">
     <h1>Create a new ingredient</h1>
 
-    <form th:action = "@{/ingredient}" method="post" th:object = "${newIngredient}">
-        <table>
-            <tr>
-                <td><label for="measurementUnitField">Unit</label></td>
-                <td><label for="nameIngredientField">Name</label></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="text" id="measurementUnitField" th:field = "*{measurementUnit}">
-                </td>
-                <td>
-                    <input type="text" id="nameIngredientField" th:field = "*{nameIngredient}">
-                </td>
-            </tr>
-        </table>
-        <input type="submit" value="Save ingredient">
-    </form>
+    <div class="container_row">
+        <div>
+            <form th:action = "@{/ingredient/new}" method="post" th:object = "${newIngredient}">
+                <input type="hidden" th:field="*{ingredientId}">
+                <table>
+                    <tr>
+                        <td><label for="measurementUnitField">Unit</label></td>
+                        <td><label for="nameIngredientField">Name</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="btn btn-primary" id="measurementUnitField" th:field="*{measurementUnit}">
+                                <option th:each="measurement: ${allMeasurementTypes}"
+                                        th:text="${measurement.nameOfMeasurement}"
+                                        th:value="${measurement.measurementUnitId}">
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="nameIngredientField" th:field = "*{nameIngredient}">
+                        </td>
+                    </tr>
+                </table>
+                <input class="btn btn-primary" type="submit" value="Save ingredient">
+            </form>
+        </div>
+
+        <div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                </tr>
+                <tr th:each="ingredient : ${allIngredients}">
+                    <td th:href="@{/ingredient/new/{nameIngredient}(nameIngredient =
+                    ${ingredient.nameIngredient})}" th:text="${ingredient.nameIngredient}"></td>
+                    <td><button class="btn btn-outline-success" th:href="@{/ingredient/edit/{nameIngredient}(nameIngredient =
+                ${ingredient.nameIngredient})}">Edit ingredient</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>
